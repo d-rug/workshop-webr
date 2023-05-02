@@ -1,6 +1,11 @@
 project:
   type: book
   output-dir: docs
+  resources:
+    - /webr-serviceworker.js
+    - /webr-worker.js
+
+filter: webr
 
 book:
   title: "YOUR WORKSHOP TITLE"
@@ -12,9 +17,7 @@ book:
   downloads: [pdf]
   chapters:
     - index.qmd
-    - 01_intro.qmd
-    - 02_example.qmd
-  
+
   sidebar:
     logo: https://github.com/d-rug/d-rug.github.io/raw/main/DRUG_final_cobalt.png
   site-url: https://d-rug.github.io

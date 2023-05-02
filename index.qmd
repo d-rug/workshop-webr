@@ -5,6 +5,16 @@ format:
     theme: cosmo
 ---
 
+
+{{< include _webr-include.qmd >}}
+
+
 # Overview {.unnumbered}
 
-YOUR DESCRIPTION, LEARNING GOALS, PREREQUISITES, ETC
+
+
+## WebR example
+
+```{webr}
+summary( cars )
+```
