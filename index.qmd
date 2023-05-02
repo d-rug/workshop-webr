@@ -19,5 +19,5 @@ webr:
 ## WebR example
 
 ```{webr}
-summary( cars )
+summary( mtcars )
 ```
