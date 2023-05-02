@@ -1,3 +1,18 @@
+# WebR workshop reader
+
+## Getting past "Loading WebR..."
+I've had some difficulty getting the reader to work reliably. There are some clues at [the Github repository of the webR quarto extension](https://github.com/coatless/quarto-webr). In particular, the javascript workers `webr-worker.js` and `webr-serviceworker.js` must be at the base level of the reader (or else pointed to by the `service-worker-url` yaml option, but I haven't tested that.) Even when that is the case, I've needed to manually change the workers to point to the "latest" versions, like:
+
+```{js}
+#| eval=false
+importScripts('https://webr.r-wasm.org/latest/webr-serviceworker.js');
+```
+
+Somehow, Quarto overwrites that every time I render the document, so I have to then go into `docs/` and manually adjust the URIs in the `.js` files. Ideally, I'd figure out how to change the behavior of the `webr` Quarto extension, but I havent' figured that out yet.
+
+## installing packages
+The documentation lists multiple ways, but all that's worked for me is to run `webr::install()` at the console in the website.
+
 # Quarto Template: Workshop Reader
 
 This repository is a `Quarto` based template for workshop readers for the UC Davis DataLab.
