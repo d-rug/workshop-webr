@@ -32,8 +32,8 @@
 #| echo: false
 webr_counter = 0
 
-cat("importScripts('https://webr.r-wasm.org/v0.1.0/webr-worker.js');", file = "webr-worker.js")
-cat("importScripts('https://webr.r-wasm.org/v0.1.0/webr-serviceworker.js');", file = "webr-serviceworker.js")
+cat("importScripts('https://webr.r-wasm.org/latest/webr-worker.js');", file = "webr-worker.js")
+cat("importScripts('https://webr.r-wasm.org/latest/webr-serviceworker.js');", file = "webr-serviceworker.js")
 
 webr_editor = function(code = I(encodeString(code, quote = '`')), width, height) { 
 webr_counter <<- webr_counter + 1

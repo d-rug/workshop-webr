@@ -9,9 +9,9 @@ filter: webr
 
 book:
   title: "YOUR WORKSHOP TITLE"
-  author: "[YOUR NAME]"
-  date: "DATE"
-  
+  author: "Wesley Brooks"
+  date: last-modified
+  date-format: D MMMM, YYYY
   search: true
   repo-url: https://github.com/d-rug/YOUR_REPO
   downloads: [pdf]
