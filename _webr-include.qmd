@@ -68,7 +68,7 @@ output = glue::glue('
       withAutoprint: true,
       captureStreams: true,
       captureConditions: false,
-      env: webR.objs.emptyEnv,
+      env: webR.objs.globalEnv,
     });
     try {
       await webR.evalRVoid("dev.off()");
