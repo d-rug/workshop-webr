@@ -4,13 +4,13 @@
     "href": "index.html",
     "title": "Using R in the Browser: WebR",
     "section": "",
-    "text": "Overview"
+    "text": "Overview\nWebR is a"
   },
   {
     "objectID": "index.html#webr-example",
     "href": "index.html#webr-example",
     "title": "Using R in the Browser: WebR",
     "section": "WebR example",
-    "text": "WebR example\n\n\nLoading webR…\n\n\n\n\n\n\n\n\n\n\nUpload File\n\n                        &lt;input id=\"input-upload\" type=\"file\" style=\"display: none\"/&gt;\n                        &lt;button id=\"download-file\" disabled style=\"flex: 1\"&gt;Download File&lt;/button&gt;\n\n\nLoading webR…"
+    "text": "WebR example\npenguins = read.csv(\"https://d-rug.github.io/workshop-webr/data/penguins.csv\")\nsummary( penguins )"
   }
 ]
