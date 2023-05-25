@@ -4,13 +4,13 @@
     "href": "index.html",
     "title": "Using R in the Browser: WebR",
     "section": "",
-    "text": "Overview\nWebR is a"
+    "text": "Overview\nWebR is a tool that lets you run R code in the browser on the client side. You may know that Web browsers only know three languages: html, css, and javascript. So, WebR is a port of the R source code to javascript. This is accomplished by some tools (beyond the scope of this presentation) that automatically convert C code to an intermediate language called WebAssembly.\nWebR is very new (the first release was in March 2023) ao there are still rough edges. But it works pretty smoothly with Quarto, which is how we build these workshop websites.\nAnyway, the upshot is that these workshop sites can now be interactive! Rather than copying code from the site and pasting it into R, we can now run the code directly in the site. Let’s look at an example:"
   },
   {
     "objectID": "index.html#webr-example",
     "href": "index.html#webr-example",
     "title": "Using R in the Browser: WebR",
     "section": "WebR example",
-    "text": "WebR example\npenguins = read.csv(\"https://d-rug.github.io/workshop-webr/data/penguins.csv\")\nsummary( penguins )"
+    "text": "WebR example\nThis example will show off some basic R functions. First, let’s read in some data.\n\n\nLoading webR…\n\n\n\n\n\n\n\n\n\nI’ve loaded data directly from a web address. Your computer’s file system is not visible to WebR (for security, websites aren’t allowed to see files on your computer). So you must either load data directly from the web, or upload your data to a virtual file system that I haven’t yet figured out (reminder that WebR is very new).\n\n\nLoading webR…\n\n\n\n\n\n\n\n\n\nData is maintained between chunks.\n\n\nLoading webR…\n\n\n\n\n\n\n\n\n\nJust link any R installation, the base functions are available immediately. Using functions from packages requires installing and loading the packages first, and the package installations system is unique (for the same reason as the file system is unique - your browser isn’t allowed to see most files on your computer). Installing packages via webr::install() works, but it is slower than you’re used to.\n\n\nLoading webR…\n\n\n\n\n\n\n\n\n\n\n\n\nLoading webR…"
   }
 ]
