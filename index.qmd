@@ -41,7 +41,7 @@ peng_model = lm( flipper_length_mm ~ bill_length_mm*species, data=penguins)
 summary(peng_model)
 ```
 
-Just link any R installation, the base functions are available immediately. Using functions from packages requires installing and loading the packages first, and the package installations system is unique (for the same reason as the file system is unique - your browser isn't allowed to see most files on your computer). Installing packages via `webr::install()` works, but it is slower than you're used to.
+Just like any R installation, the base functions are available immediately. Using functions from packages requires installing and loading the packages first, and the package installations system is unique (for the same reason as the file system is unique - your browser isn't allowed to see most files on your computer). Installing packages via `webr::install()` works, but it is slower than you're used to.
 
 
 ```{webr}
