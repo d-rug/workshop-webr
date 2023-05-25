@@ -8,7 +8,7 @@
 
 <meta name="author" content="Wesley Brooks">
 
-<title>YOUR WORKSHOP TITLE</title>
+<title>Using R in the Browser: WebR</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -90,10 +90,10 @@ ul.task-list li input[type="checkbox"] {
       <img src="https://github.com/d-rug/d-rug.github.io/raw/main/DRUG_final_cobalt.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">YOUR WORKSHOP TITLE</a> 
+      <a href="./">Using R in the Browser: WebR</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/d-rug/YOUR_REPO" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./YOUR-WORKSHOP-TITLE.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/d-rug/workshop-webr" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Using-R-in-the-Browser--WebR.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -131,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">YOUR WORKSHOP TITLE</h1>
+<h1 class="title">Using R in the Browser: WebR</h1>
 </div>
 
 
@@ -148,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2 May, 2023</p>
+      <p class="date">25 May, 2023</p>
     </div>
   </div>
   
@@ -207,7 +207,93 @@ Loading webR…
     elt.style.height = "auto";
     editorDiv.append(elt);
   },{
-    value: `summary( mtcars )`,
+    value: `penguins = read.csv("data/penguins.csv")`,
+    lineNumbers: true,
+    mode: "r",
+    theme: "light default",
+    viewportMargin: Infinity,
+  });
+
+  runButton.onclick = async () => {
+    runButton.disabled = true;
+    let canvas = undefined;
+    await globalThis.webR.init();
+    await webR.evalRVoid("canvas(width=504, height=360)");
+    const result = await webRCodeShelter.captureR(editor.getValue(), {
+      withAutoprint: true,
+      captureStreams: true,
+      captureConditions: false,
+      env: webR.objs.globalEnv,
+    });
+    try {
+      await webR.evalRVoid("dev.off()");
+      const out = result.output.filter(
+        evt => evt.type == "stdout" || evt.type == "stderr"
+      ).map((evt) => evt.data).join("\n");
+
+      const msgs = await webR.flush();
+      msgs.forEach(msg => {
+        if (msg.type === "canvasExec"){
+          if (!canvas) {
+            canvas = document.createElement("canvas");
+            canvas.setAttribute("width", 2 * 504);
+            canvas.setAttribute("height", 2 * 360);
+            canvas.style.width="700px";
+            canvas.style.display="block";
+            canvas.style.margin="auto";
+          }
+          Function(`this.getContext("2d").${msg.data}`).bind(canvas)();
+        }
+      });
+
+      outputDiv.innerHTML = "";
+      const pre = document.createElement("pre");
+      if (/\S/.test(out)) {
+        const code = document.createElement("code");
+        code.innerText = out;
+        pre.appendChild(code);
+      } else {
+        pre.style.visibility = "hidden";
+      }
+      outputDiv.appendChild(pre);
+
+      if (canvas) {
+        const p = document.createElement("p");
+        p.appendChild(canvas);
+        outputDiv.appendChild(p);
+      }
+    } finally {
+      webRCodeShelter.purge();
+      runButton.disabled = false;
+    }
+  }
+
+  await globalThis.webR.init();
+  runButton.innerText = "Run code";
+  runButton.disabled = false;
+</script>
+</div>
+<div class="cell">
+<button class="btn btn-default btn-webr" disabled="" type="button" id="webr-run-button-2">
+Loading webR…
+</button>
+<div id="webr-editor-2">
+
+</div>
+<div id="webr-code-output-2">
+<pre style="visibility: hidden"></pre>
+</div>
+<script type="module">
+  const runButton = document.getElementById("webr-run-button-2");
+  const outputDiv = document.getElementById("webr-code-output-2");
+  const editorDiv = document.getElementById("webr-editor-2");
+
+  const editor = CodeMirror((elt) => {
+    elt.style.border = "1px solid #eee";
+    elt.style.height = "auto";
+    editorDiv.append(elt);
+  },{
+    value: `summary( penguins )`,
     lineNumbers: true,
     mode: "r",
     theme: "light default",
