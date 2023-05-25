@@ -123,6 +123,8 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#webr-example" id="toc-webr-example" class="nav-link" data-scroll-target="#webr-example">WebR example</a></li>
   </ul></li>
+  <li><a href="#learning-more" id="toc-learning-more" class="nav-link" data-scroll-target="#learning-more">Learning more</a></li>
+  <li><a href="#using-webr" id="toc-using-webr" class="nav-link" data-scroll-target="#using-webr">Using WebR</a></li>
   </ul>
 </nav>
     </div>
@@ -452,7 +454,6 @@ Loading webR…
 </script>
 </div>
 <p>Just link any R installation, the base functions are available immediately. Using functions from packages requires installing and loading the packages first, and the package installations system is unique (for the same reason as the file system is unique - your browser isn’t allowed to see most files on your computer). Installing packages via <code>webr::install()</code> works, but it is slower than you’re used to.</p>
-<div class="cell">
 <button class="btn btn-default btn-webr" disabled="" type="button" id="webr-run-button-4">
 Loading webR…
 </button>
@@ -473,7 +474,7 @@ Loading webR…
     elt.style.height = "auto";
     editorDiv.append(elt);
   },{
-    value: `# try making a nicely formatted table\n\nknitr::kable()`,
+    value: `# try making a nicely formatted table\nwebr::install("xtable")\nlibrary(xtable)\nxtable(summary(peng_model)) |>\n  print(digits=2)`,
     lineNumbers: true,
     mode: "r",
     theme: "light default",
@@ -538,7 +539,6 @@ Loading webR…
   runButton.innerText = "Run code";
   runButton.disabled = false;
 </script>
-</div>
 <div class="cell">
 <button class="btn btn-default btn-webr" disabled="" type="button" id="webr-run-button-5">
 Loading webR…
@@ -559,7 +559,7 @@ Loading webR…
     elt.style.height = "auto";
     editorDiv.append(elt);
   },{
-    value: `webr::install("ggplot2")\nlibrary(ggplot2)\nggplot( penguins ) +\n  aes(x=bill_length_mm, y=flipper_length_mm, color=species, shape=species) +\n  geom_point() +\n  geom_smooth(method=)`,
+    value: `# make a ggplot2 plot of the penguin data\nwebr::install("ggplot2")\nlibrary(ggplot2)\nggplot( penguins ) +\n  aes(x=bill_length_mm, \n      y=flipper_length_mm, \n      color=species, \n      shape=species) +\n  geom_point() +\n  geom_smooth(method='lm', \n              se=FALSE) +\n  xlab("Bill length (mm)") +\n  ylab("Flipper length (mm)") +\n  ggtitle("Flipper length vs bill length of penguins",\n          subtitle="Data from Palmer Station LTER site, Antarctica")`,
     lineNumbers: true,
     mode: "r",
     theme: "light default",
@@ -625,9 +625,17 @@ Loading webR…
   runButton.disabled = false;
 </script>
 </div>
-
-
 </section>
+</section>
+<section id="learning-more" class="level1">
+<h1>Learning more</h1>
+<p>The <a href="https://r-wasm.org">official WebR site</a> is nice, but I find it to be a bit confusing for a non-expert web developer. There’s also <a href="https://github.com/nanxstats/awesome-webr">this list of resources about WebR</a> with better variety and more examples to draw from. And, you can always post questions on the <a href="https://d-rug.discourse.group">D-RUG question forum</a> for help from the group.</p>
+</section>
+<section id="using-webr" class="level1">
+<h1>Using WebR</h1>
+<p>If you want to include WebR in your own website, I would recommend that you start by using the <a href="https://github.com/d-rug/workshop-webr-template">D-RUG WebR workshop template</a>. That template is for a Quarto project, so you will need to install Quarto to use it, but I recommend using Quarto to build your website, anyway.</p>
+
+
 </section>
 
 </main> <!-- /main -->
