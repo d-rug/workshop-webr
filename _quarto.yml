@@ -8,12 +8,12 @@ project:
 filter: webr
 
 book:
-  title: "YOUR WORKSHOP TITLE"
+  title: "Using R in the Browser: WebR"
   author: "Wesley Brooks"
   date: last-modified
   date-format: D MMMM, YYYY
   search: true
-  repo-url: https://github.com/d-rug/YOUR_REPO
+  repo-url: https://github.com/d-rug/workshop-webr
   downloads: [pdf]
   chapters:
     - index.qmd
