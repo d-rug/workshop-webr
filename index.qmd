@@ -14,6 +14,8 @@ webr:
 
 # Overview {.unnumbered}
 
+## The URL for this workshop is `d-rug.github.io/workshop-webr`
+
 [WebR](https://r-wasm.org) is a tool that lets you run R code in the browser *on the client side*. You may know that Web browsers only know three languages: `html`, `css`, and `javascript`. So, WebR is a port of the R source code to javascript. This is accomplished by some tools (beyond the scope of this presentation) that automatically convert C code to an intermediate language called `WebAssembly`.
 
 WebR is *very* new (the first release was in March 2023) ao there are still rough edges. But it works pretty smoothly with Quarto, which is how we build these workshop websites.
