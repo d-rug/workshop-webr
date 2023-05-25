@@ -454,6 +454,7 @@ Loading webR…
 </script>
 </div>
 <p>Just link any R installation, the base functions are available immediately. Using functions from packages requires installing and loading the packages first, and the package installations system is unique (for the same reason as the file system is unique - your browser isn’t allowed to see most files on your computer). Installing packages via <code>webr::install()</code> works, but it is slower than you’re used to.</p>
+<div class="cell">
 <button class="btn btn-default btn-webr" disabled="" type="button" id="webr-run-button-4">
 Loading webR…
 </button>
@@ -463,96 +464,10 @@ Loading webR…
 <div id="webr-code-output-4">
 <pre style="visibility: hidden"></pre>
 </div>
-
 <script type="module">
   const runButton = document.getElementById("webr-run-button-4");
   const outputDiv = document.getElementById("webr-code-output-4");
   const editorDiv = document.getElementById("webr-editor-4");
-
-  const editor = CodeMirror((elt) => {
-    elt.style.border = "1px solid #eee";
-    elt.style.height = "auto";
-    editorDiv.append(elt);
-  },{
-    value: `# try making a nicely formatted table\nwebr::install("xtable")\nlibrary(xtable)\nxtable(summary(peng_model)) |>\n  print(digits=2)`,
-    lineNumbers: true,
-    mode: "r",
-    theme: "light default",
-    viewportMargin: Infinity,
-  });
-
-  runButton.onclick = async () => {
-    runButton.disabled = true;
-    let canvas = undefined;
-    await globalThis.webR.init();
-    await webR.evalRVoid("canvas(width=504, height=360)");
-    const result = await webRCodeShelter.captureR(editor.getValue(), {
-      withAutoprint: true,
-      captureStreams: true,
-      captureConditions: false,
-      env: webR.objs.globalEnv,
-    });
-    try {
-      await webR.evalRVoid("dev.off()");
-      const out = result.output.filter(
-        evt => evt.type == "stdout" || evt.type == "stderr"
-      ).map((evt) => evt.data).join("\n");
-
-      const msgs = await webR.flush();
-      msgs.forEach(msg => {
-        if (msg.type === "canvasExec"){
-          if (!canvas) {
-            canvas = document.createElement("canvas");
-            canvas.setAttribute("width", 2 * 504);
-            canvas.setAttribute("height", 2 * 360);
-            canvas.style.width="700px";
-            canvas.style.display="block";
-            canvas.style.margin="auto";
-          }
-          Function(`this.getContext("2d").${msg.data}`).bind(canvas)();
-        }
-      });
-
-      outputDiv.innerHTML = "";
-      const pre = document.createElement("pre");
-      if (/\S/.test(out)) {
-        const code = document.createElement("code");
-        code.innerText = out;
-        pre.appendChild(code);
-      } else {
-        pre.style.visibility = "hidden";
-      }
-      outputDiv.appendChild(pre);
-
-      if (canvas) {
-        const p = document.createElement("p");
-        p.appendChild(canvas);
-        outputDiv.appendChild(p);
-      }
-    } finally {
-      webRCodeShelter.purge();
-      runButton.disabled = false;
-    }
-  }
-
-  await globalThis.webR.init();
-  runButton.innerText = "Run code";
-  runButton.disabled = false;
-</script>
-<div class="cell">
-<button class="btn btn-default btn-webr" disabled="" type="button" id="webr-run-button-5">
-Loading webR…
-</button>
-<div id="webr-editor-5">
-
-</div>
-<div id="webr-code-output-5">
-<pre style="visibility: hidden"></pre>
-</div>
-<script type="module">
-  const runButton = document.getElementById("webr-run-button-5");
-  const outputDiv = document.getElementById("webr-code-output-5");
-  const editorDiv = document.getElementById("webr-editor-5");
 
   const editor = CodeMirror((elt) => {
     elt.style.border = "1px solid #eee";
