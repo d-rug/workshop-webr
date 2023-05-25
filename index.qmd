@@ -19,5 +19,11 @@ webr:
 ## WebR example
 
 ```{webr}
-summary( mtcars )
+penguins = read.csv("data/penguins.csv")
+```
+
+
+
+```{webr}
+summary( penguins )
 ```
